@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube API</title>
+</head>
+<style>
+    *{
+        background-color: rgb(40,40,40);
+        margin: 0px;
+    }
+    nav{
+        background-color: rgb(31,31,31);
+        height: 120px;
+    }
+    #flx{
+        display: flex;
+        width: 100vw;
+        margin-top: 50px;
+    }
+    #flx div{
+        font-family: sans-serif;
+        font-size: 20px;
+        width: 50vw;
+    }
+    #flx p{
+        color: grey;
+    }
+
+</style>
+<body>
+    <center>
+        <img src="yt.png" alt="" style="width: 20px;position: absolute;margin-top: 20px;margin-left: -15px;">
+    </center>
+    <nav>
+        
+    </nav>
+    <center style="font-family: sans-serif;">
+        <img src="GeekNerd Logo.png" alt="" style="width: 100px; margin-top: -60px;border-radius: 50%;border: 10px solid rgb(40,40,40);">
+        <div style="margin-top: 15vh">
+            <div id="subscriberCount" style="font-size: 100px;color: white;">
+            </div>
+            <p style="margin-top: 5px;font-size: 20px;font-weight: 600;color: grey;">Subscribers</p>
+        </div>
+        <div id="flx">
+            <div>
+                <div id="viewCount" style="font-size: 70px;color: white;"></div>
+                <p style="margin-top: 5px;font-size: 20px;font-weight: 600;color: grey;">View Count</p>
+            </div>
+            <div>
+                <div id="videoCount" style="font-size: 70px;color: white;"></div>
+                <p style="margin-top: 5px;font-size: 20px;font-weight: 600;color: grey;">Video Count</p>
+            </div>
+        </div>
+    </center>
+
+    <!-- YouTube Video Views -->
+
+    <!-- YouTube Video Count -->
+
+    <script>
+
+    
+    const APIKey = 'AIzaSyCsX-6wsPLFTQYuAUQZQea8-u8IARaf0AU';
+    const Userid = 'UCPI0J4401be7SHmoINyux7w';
+    const subscriberCount= document.getElementById('subscriberCount');
+    const viewCount = document.getElementById('viewCount');
+    const videoCount = document.getElementById('videoCount');
+
+   
+
+    let getdata = () => {
+
+        fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${Userid}&key=${APIKey}`)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data);
+            subscriberCount.innerHTML = data["items"][0].statistics.subscriberCount;
+            viewCount.innerHTML = data["items"][0].statistics.viewCount;
+            videoCount.innerHTML = data["items"][0].statistics.videoCount;
+            
+        })
+
+    }
+
+   getdata();
+    </script>
+</body>
+</html>
